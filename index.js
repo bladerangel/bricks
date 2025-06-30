@@ -77,12 +77,12 @@ app.get("/account/documentNumber", (request, response) => {
             accounts: [
                 {
                     statusAccount: "ATIVO",
-                    account: "87683664000180",
+                    account: "12345678",
                     type: "NATURAL_PERSON",
                     createDate: "2022-08-01T10:00:01",
                     lastUpdate: "2022-08-01T10:00:01",
                     clientCode: "123456",
-                    branch: "123456",
+                    branch: "0001",
                     onBoardingId: "39c8e322-9192-498d-947e-2daa4dfc749e"
                 }
             ],
