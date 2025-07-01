@@ -22,7 +22,7 @@ app.get("/payment-initiation", async (request, response) => {
                 payment: {
                     amount: "10.32",
                     currency: "BRL",
-                    date: "2025-06-30",
+                    date: new Date().toISOString().split("T")[0],
                     details: {
                         creditorAccount: {
                             number: "12345678",
