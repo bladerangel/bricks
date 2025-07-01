@@ -96,7 +96,7 @@ app.get("/account/documentNumber", (request, response) => {
                     onBoardingId: "39c8e322-9192-498d-947e-2daa4dfc749e"
                 }
             ],
-            totalItems: 1
+            totalItems: 2
         }
     })
 })
