@@ -69,38 +69,6 @@ app.get("/login", (request, response) => {
     response.redirect(redirectUrl)
 })
 
-app.get("/account/documentNumber", (request, response) => {
-    response.json({
-        version: "1.0.0",
-        status: "SUCCESS",
-        body: {
-            accounts: [
-                {
-                    statusAccount: "ATIVO",
-                    account: "12345678",
-                    type: "NATURAL_PERSON",
-                    createDate: "2022-08-01T10:00:01",
-                    lastUpdate: "2022-08-01T10:00:01",
-                    clientCode: "123456",
-                    branch: "0001",
-                    onBoardingId: "39c8e322-9192-498d-947e-2daa4dfc749e"
-                },
-                {
-                    statusAccount: "ATIVO",
-                    account: "11111111",
-                    type: "NATURAL_PERSON",
-                    createDate: "2022-08-01T10:00:01",
-                    lastUpdate: "2022-08-01T10:00:01",
-                    clientCode: "123456",
-                    branch: "0001",
-                    onBoardingId: "39c8e322-9192-498d-947e-2daa4dfc749e"
-                }
-            ],
-            totalItems: 2
-        }
-    })
-})
-
 app.post("/token", async (request, response) => {
     try {
         const payload = {
