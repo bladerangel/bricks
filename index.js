@@ -1,51 +1,13 @@
-require("dotenv").config()
-const express = require("express")
+import "dotenv/config"
+import express from "express"
+import * as service from "./service.js"
+
 const app = express()
-const axios = require("axios")
-const qs = require("qs")
 
 app.get("/payment-initiation", async (request, response) => {
     try {
-        const payload = {
-            data: {
-                loggedUser: {
-                    document: {
-                        identification: "12345678909",
-                        rel: "CPF"
-                    }
-                },
-                creditor: {
-                    name: "Joao Silva",
-                    cpfCnpj: "99991111140",
-                    personType: "PESSOA_NATURAL"
-                },
-                payment: {
-                    amount: "10.32",
-                    currency: "BRL",
-                    date: new Date().toISOString().split("T")[0],
-                    details: {
-                        creditorAccount: {
-                            number: "12345678",
-                            accountType: "CACC",
-                            ispb: "99999004",
-                            issuer: "0001"
-                        },
-                        localInstrument: "DICT",
-                        proxy: "cliente-a00001@pix.bcb.gov.br"
-                    },
-                    type: "PIX"
-                }
-            },
-            brandId: "5960a4a9-76cd-4eca-b470-78572eb33a84",
-            specVersion: "v4"
-        }
-
-        const { data } = await axios.post(
-            process.env.OPEN_FINANCE_API_BASE_URL,
-            payload
-        )
-
-        response.redirect(data.authorization_url)
+        const authorizationUrl = await service.getAuthorizationUrl()
+        response.redirect(authorizationUrl)
     } catch (error) {
         console.error(error.response?.data || error.message)
     }
@@ -62,19 +24,8 @@ app.get("/login", (request, response) => {
 
 app.post("/token", async (request, response) => {
     try {
-        const payload = {
-            grant_type: process.env.KEYCLOAK_API_GRANT_TYPE,
-            client_id: process.env.KEYCLOAK_API_CLIENT_ID,
-            client_secret: process.env.KEYCLOAK_API_CLIENT_SECRET,
-            username: process.env.KEYCLOAK_API_USERNAME,
-            password: process.env.KEYCLOAK_API_PASSWORD
-        }
-
-        const { data } = await axios.post(
-            process.env.KEYCLOAK_API_BASE_URL,
-            qs.stringify(payload)
-        )
-        response.json(data)
+        const accessToken = await service.getFinansystechToken()
+        response.json({ access_token: accessToken })
     } catch (error) {
         console.error(error.response?.data || error.message)
     }
