@@ -53,7 +53,7 @@ app.get("/payment-initiation", async (request, response) => {
 
         const interactionId = responseUrl.match(/interactionId=([^&]+)/)?.[1]
 
-        const redirectUrl = `${process.env.FRONTEND_BASE_URL}/bricks/auth?interactionId=${interactionId}`
+        const redirectUrl = `${process.env.FRONTEND_BASE_URL}/brand1/auth?interactionId=${interactionId}`
         response.redirect(redirectUrl)
     } catch (error) {
         console.error(error.response?.data || error.message)
