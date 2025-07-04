@@ -36,7 +36,7 @@ app.get("/payment-initiation", async (request, response) => {
                     type: "PIX"
                 }
             },
-            brandId: "3a40d894-f3c2-47e3-97c2-d9a04cdac63c",
+            brandId: "5960a4a9-76cd-4eca-b470-78572eb33a84",
             specVersion: "v4"
         }
 
