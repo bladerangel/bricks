@@ -45,16 +45,7 @@ app.get("/payment-initiation", async (request, response) => {
             payload
         )
 
-        const { request: authorizationRequest } = await axios.get(
-            data.authorization_url
-        )
-
-        const responseUrl = authorizationRequest.res.responseUrl
-
-        const interactionId = responseUrl.match(/interactionId=([^&]+)/)?.[1]
-
-        const redirectUrl = `${process.env.FRONTEND_BASE_URL}/brand1/auth?interactionId=${interactionId}`
-        response.redirect(redirectUrl)
+        response.redirect(data.authorization_url)
     } catch (error) {
         console.error(error.response?.data || error.message)
     }
