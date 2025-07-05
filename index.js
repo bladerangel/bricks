@@ -32,7 +32,7 @@ app.post("/token", async (request, response) => {
     }
 })
 
-app.get("/payment", (request, response) => {
+app.post("/payment", (request, response) => {
     response.json({ clientCode: crypto.randomUUID() })
 })
 
