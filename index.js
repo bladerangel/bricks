@@ -1,5 +1,6 @@
 import "dotenv/config"
 import express from "express"
+import crypto from "crypto"
 import * as service from "./service.js"
 
 const app = express()
@@ -29,6 +30,10 @@ app.post("/token", async (request, response) => {
     } catch (error) {
         console.error(error.response?.data || error.message)
     }
+})
+
+app.get("/payment", (request, response) => {
+    response.json({ clientCode: crypto.randomUUID() })
 })
 
 const port = process.env.PORT
