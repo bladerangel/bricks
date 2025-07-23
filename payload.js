@@ -45,7 +45,7 @@ export const enrollment = {
     },
     riskSignals: {
         deviceId: "00aa11bb22cc33dd",
-        accountTenure: "2025-05-30",
+        accountTenure: new Date().toISOString().split("T")[0],
         userTimeZoneOffset: "-03",
         language: "pt",
         osVersion: "14",
