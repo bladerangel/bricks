@@ -1,13 +1,29 @@
 import "dotenv/config"
 import express from "express"
 import crypto from "crypto"
+import * as payload from "./payload.js"
 import * as service from "./service.js"
 
 const app = express()
 
 app.get("/payment-initiation", async (request, response) => {
     try {
-        const authorizationUrl = await service.getAuthorizationUrl()
+        const authorizationUrl = await service.getAuthorizationUrl(
+            "/v1/consents",
+            payload.payment
+        )
+        response.redirect(authorizationUrl)
+    } catch (error) {
+        console.error(error.response?.data || error.message)
+    }
+})
+
+app.get("/enrollment-initiation", async (request, response) => {
+    try {
+        const authorizationUrl = await service.getAuthorizationUrl(
+            "/v2/enrollments",
+            payload.enrollment
+        )
         response.redirect(authorizationUrl)
     } catch (error) {
         console.error(error.response?.data || error.message)

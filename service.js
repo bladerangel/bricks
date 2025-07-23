@@ -16,45 +16,11 @@ export async function getBaasToken() {
     return data.access_token
 }
 
-export async function getAuthorizationUrl() {
+export async function getAuthorizationUrl(path, payload) {
     const access_token = await getBaasToken()
 
-    const payload = {
-        data: {
-            loggedUser: {
-                document: {
-                    identification: "12345678909",
-                    rel: "CPF"
-                }
-            },
-            creditor: {
-                name: "Joao Silva",
-                cpfCnpj: "99991111140",
-                personType: "PESSOA_NATURAL"
-            },
-            payment: {
-                amount: "10.32",
-                currency: "BRL",
-                date: new Date().toISOString().split("T")[0],
-                details: {
-                    creditorAccount: {
-                        number: "12345678",
-                        accountType: "CACC",
-                        ispb: "99999004",
-                        issuer: "0001"
-                    },
-                    localInstrument: "DICT",
-                    proxy: "cliente-a00001@pix.bcb.gov.br"
-                },
-                type: "PIX"
-            }
-        },
-        brandId: "5960a4a9-76cd-4eca-b470-78572eb33a84",
-        specVersion: "v4"
-    }
-
     const { data } = await axios.post(
-        process.env.OPEN_FINANCE_API_BASE_URL,
+        `${process.env.OPEN_FINANCE_API_BASE_URL}${path}`,
         payload,
         {
             headers: {
