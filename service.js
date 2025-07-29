@@ -29,7 +29,17 @@ export async function getAuthorizationUrl(path, payload) {
         }
     )
 
-    return data.authorization_url
+    return await redirectUrl(data.authorization_url)
+}
+
+export async function redirectUrl(url) {
+    const data = await axios.get(url)
+
+    const interactionId = data.request.res.responseUrl.match(
+        /interactionId=([^&]+)/
+    )?.[1]
+
+    return `${process.env.FRONTEND_BASE_URL}/celcoin/auth?interactionId=${interactionId}`
 }
 
 export async function getFinansystechToken() {
