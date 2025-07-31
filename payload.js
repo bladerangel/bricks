@@ -1,5 +1,5 @@
 export const payment = {
-    brandId: "b0e14b00-9686-4764-bdac-5fe415b1dc1a",
+    brandId: process.env.OPEN_FINANCE_API_PAYMENT_BRAND_Id,
     specVersion: "v4",
     data: {
         loggedUser: {
@@ -33,7 +33,7 @@ export const payment = {
 }
 
 export const enrollment = {
-    brandId: "b0e14b00-9686-4764-bdac-5fe415b1dc1a",
+    brandId: process.env.OPEN_FINANCE_API_ENROLLMENT_BRAND_Id,
     enrollment: {
         loggedUser: {
             document: {
