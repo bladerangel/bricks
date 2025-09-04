@@ -1,4 +1,6 @@
 {
-    "watch": ["index.js", ".env"],
-    "ext": "js,json"
+    "watch": [".", ".env"],
+    "ext": "js,json",
+    "ignore": ["node_modules", ".git", "dist"],
+    "delay": "200ms"
 }
